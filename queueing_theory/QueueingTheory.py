@@ -18,7 +18,8 @@ def mm1(arrival_times, service_times, initial_state = None):
                    This will force the queue_size at that time.
     """
     n_process = arrival_times.size
-    initial_state = initial_state or (0,arrival_times[0]) 
+    initial_state = initial_state or (0,arrival_times[0])
+    print "initial_state:", initial_state
     completion_times = empty(n_process)
     enter_service_times = empty(n_process)
     completion_times[0] = initial_state[1] + service_times[0]
@@ -33,10 +34,10 @@ def mm1(arrival_times, service_times, initial_state = None):
     queue_size = zeros(n_process)
     for k in xrange(n_process):
         system_size[k] = (completion_times[:k][completion_times[:k] > arrival_times[k]]).size
-        queue_size[k] = (enter_service_times[:k][enter_service_times[:k] > arrival_times[k]]).size  
+        queue_size[k] = (enter_service_times[:k][enter_service_times[:k] >= arrival_times[k]]).size  
 
     def queue_size_by_time(time):
-        return enter_service_times[(enter_service_times > time) & (arrival_times < time)].size
+        return enter_service_times[(enter_service_times >= time) & (arrival_times < time)].size
    
     return { 
         'system_size' : system_size, 
