@@ -1,4 +1,4 @@
-# mmc with different values for service rates 
+#mmc with different values for service rates 
 from scipy import mean, digitize, cumsum, array, concatenate, set_printoptions, nonzero, insert, ones, random
 from scipy.stats import uniform, expon
 

@@ -17,9 +17,11 @@ def mm1(arrival_times, service_times, initial_state = None):
     initial_state: a tuple (forced_queue_size, at_what_time)
                    This will force the queue_size at that time.
     """
+    if arrival_times.size == 0 or service_times.size == 0:
+        return None
+        
     n_process = arrival_times.size
     initial_state = initial_state or (0,arrival_times[0])
-    print "initial_state:", initial_state
     completion_times = empty(n_process)
     enter_service_times = empty(n_process)
     completion_times[0] = initial_state[1] + service_times[0]
