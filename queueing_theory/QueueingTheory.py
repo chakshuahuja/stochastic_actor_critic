@@ -38,8 +38,9 @@ def mm1(arrival_times, service_times, initial_state = None):
         system_size[k] = (completion_times[:k][completion_times[:k] > arrival_times[k]]).size
         queue_size[k] = (enter_service_times[:k][enter_service_times[:k] >= arrival_times[k]]).size  
 
-    def queue_size_by_time(time):
-        return enter_service_times[(enter_service_times >= time) & (arrival_times < time)].size
+    def queue_size_by_time(time, max_n_process = 0):
+        queue_size_at_time =  enter_service_times[(enter_service_times >= time) & (arrival_times < time)].size
+        return min(queue_size_at_time, max_n_process)
    
     return { 
         'system_size' : system_size, 
